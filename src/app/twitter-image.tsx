@@ -1,6 +1,6 @@
 import Image from './opengraph-image';
 
-export const runtime = 'edge';
+export const dynamic = 'force-static';
 export const alt = '闇ココイチいし - トランプで選ぶ、運命のトッピング';
 export const size = {
   width: 1200,
