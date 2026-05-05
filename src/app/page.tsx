@@ -53,8 +53,8 @@ export default function Home() {
         <p className="text-sm text-gold/60 mt-2">
           Remaining cards in deck: <span className="font-bold">{remainingCount}</span> / 54
         </p>
-        
-        <button 
+
+        <button
           onClick={resetDeck}
           className="text-xs text-white/40 hover:text-white/60 mt-4 underline"
         >
@@ -99,13 +99,13 @@ export default function Home() {
         </div>
         <div className="text-center">
           <p className="text-xs text-white/40 uppercase tracking-widest mb-2">Inspired by</p>
-          <a 
-            href="https://youtu.be/S3t48wgO_1A" 
-            target="_blank" 
+          <a
+            href="https://youtu.be/S3t48wgO_1A"
+            target="_blank"
             rel="noopener noreferrer"
             className="text-gold/60 hover:text-gold transition-colors text-xs flex items-center gap-2"
           >
-            <span>壱百満天原サロメ - 闇ココイチ</span>
+            <span>僕らの別荘 - 闇ココイチいし</span>
             <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/>
             </svg>
