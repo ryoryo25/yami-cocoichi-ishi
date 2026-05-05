@@ -13,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://ryotoyota.github.io/yami-cocoichi-ishi"),
   title: "闇ココイチいし",
   description: "トランプで選ぶ、運命のトッピング",
   openGraph: {
