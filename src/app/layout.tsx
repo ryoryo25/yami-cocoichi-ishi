@@ -21,11 +21,20 @@ export const metadata: Metadata = {
     description: "トランプで選ぶ、運命のトッピング",
     type: "website",
     locale: "ja_JP",
+    images: [
+      {
+        url: "ogp.svg",
+        width: 1200,
+        height: 630,
+        alt: "闇ココイチいし - トランプで選ぶ、運命のトッピング",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "闇ココイチいし",
     description: "トランプで選ぶ、運命のトッピング",
+    images: ["ogp.svg"],
   },
 };
 
