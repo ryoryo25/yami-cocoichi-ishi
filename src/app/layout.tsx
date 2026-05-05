@@ -15,6 +15,17 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "闇ココイチいし",
   description: "トランプで選ぶ、運命のトッピング",
+  openGraph: {
+    title: "闇ココイチいし",
+    description: "トランプで選ぶ、運命のトッピング",
+    type: "website",
+    locale: "ja_JP",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "闇ココイチいし",
+    description: "トランプで選ぶ、運命のトッピング",
+  },
 };
 
 export default function RootLayout({
