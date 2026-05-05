@@ -26,11 +26,16 @@ async function fetchToppings() {
     // Deduplicate and filter empty names
     const uniqueToppings = toppings.filter((v, i, a) => a.findIndex(t => t.name === v.name) === i);
 
+    const result = {
+      updatedAt: new Date().toISOString().split('T')[0], // YYYY-MM-DD
+      items: uniqueToppings
+    };
+
     console.log(`Fetched ${uniqueToppings.length} toppings.`);
 
     fs.writeFileSync(
       path.join(process.cwd(), 'data/toppings.json'),
-      JSON.stringify(uniqueToppings, null, 2)
+      JSON.stringify(result, null, 2)
     );
   } catch (error) {
     console.error('Error fetching toppings:', error);

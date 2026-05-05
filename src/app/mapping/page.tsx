@@ -1,6 +1,6 @@
 'use client';
 
-import { ALL_CARDS, getCardLabel } from '@/lib/constants';
+import { ALL_CARDS, getCardLabel, TOPPINGS_UPDATED_AT } from '@/lib/constants';
 import Link from 'next/link';
 
 export default function MappingTable() {
@@ -13,7 +13,10 @@ export default function MappingTable() {
         <h1 className="text-3xl font-black text-gold uppercase tracking-tighter italic">
           Mapping Reference
         </h1>
-        <p className="text-white/60">トランプとトッピングの全対応表</p>
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-2 mt-2">
+          <p className="text-white/60">トランプとトッピングの全対応表</p>
+          <p className="text-xs text-gold/40 font-mono">Data updated at: {TOPPINGS_UPDATED_AT}</p>
+        </div>
       </header>
 
       <section className="bg-black/30 rounded-2xl casino-border overflow-hidden">

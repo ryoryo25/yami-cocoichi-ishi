@@ -5,7 +5,8 @@ export type Topping = {
   image: string;
 };
 
-export const TOPPINGS: Topping[] = toppingsData;
+export const TOPPINGS: Topping[] = toppingsData.items;
+export const TOPPINGS_UPDATED_AT: string = toppingsData.updatedAt;
 
 export type Suit = 'spades' | 'hearts' | 'diamonds' | 'clubs' | 'joker';
 
