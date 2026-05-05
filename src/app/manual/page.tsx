@@ -8,13 +8,21 @@ import Link from 'next/link';
 export default function ManualInput() {
   const [suit, setSuit] = useState<Suit>('spades');
   const [value, setValue] = useState(1);
-  const [selectedCard, setSelectedCard] = useState<Card | null>(null);
+  const [selectedCards, setSelectedCards] = useState<Card[]>([]);
 
-  const handleLookup = () => {
+  const handleAddCard = () => {
     const card = ALL_CARDS.find(c => c.suit === suit && c.value === value);
     if (card) {
-      setSelectedCard(card);
+      setSelectedCards(prev => [...prev, card]);
     }
+  };
+
+  const handleRemoveCard = (index: number) => {
+    setSelectedCards(prev => prev.filter((_, i) => i !== index));
+  };
+
+  const handleClear = () => {
+    setSelectedCards([]);
   };
 
   return (
@@ -26,7 +34,7 @@ export default function ManualInput() {
         <h1 className="text-3xl font-black text-gold uppercase tracking-tighter italic">
           Manual Selection
         </h1>
-        <p className="text-white/60">お手元のカードに対応するトッピングを確認します</p>
+        <p className="text-white/60">手元にあるトランプを登録してトッピングを確認します</p>
       </header>
 
       <section className="bg-black/30 p-8 rounded-2xl casino-border mb-8">
@@ -77,29 +85,53 @@ export default function ManualInput() {
           </div>
         </div>
 
-        <button
-          onClick={handleLookup}
-          className="btn-casino w-full text-lg"
-        >
-          Identify Topping
-        </button>
+        <div className="flex gap-4">
+          <button
+            onClick={handleAddCard}
+            className="btn-casino flex-1 text-lg"
+          >
+            Add Card
+          </button>
+          {selectedCards.length > 0 && (
+            <button
+              onClick={handleClear}
+              className="px-6 py-2 border-2 border-white/10 rounded-lg text-white/40 hover:text-white/60 hover:border-white/20 transition-all text-sm uppercase font-bold"
+            >
+              Clear
+            </button>
+          )}
+        </div>
       </section>
 
-      {selectedCard && (
-        <section className="animate-in fade-in zoom-in-95 duration-300">
-          <div className="flex flex-col items-center bg-white/10 p-8 rounded-xl border border-white/5 gap-8">
-            <PlayingCard card={selectedCard} />
-            <div className="text-center">
-              <p className="text-gold/60 text-xs font-bold uppercase tracking-widest mb-1">
-                Result
-              </p>
-              <p className="text-3xl font-bold text-white mb-2">
-                {selectedCard.topping ? selectedCard.topping.name : '🌟 任意のトッピング (自由選択)'}
-              </p>
-              <p className="text-sm text-white/40 italic">
-                {selectedCard.suit === 'joker' ? 'Wildcard!' : `Rank ${selectedCard.id + 1} in build list`}
-              </p>
-            </div>
+      {selectedCards.length > 0 && (
+        <section className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <h2 className="text-xl font-bold text-gold mb-6 uppercase tracking-widest italic">
+            Selected Cards ({selectedCards.length})
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {selectedCards.map((card, idx) => (
+              <div key={`${card.id}-${idx}`} className="relative group flex items-center bg-white/10 p-4 rounded-xl border border-white/5 gap-6">
+                <PlayingCard card={card} />
+                <div className="flex-1">
+                  <p className="text-gold/60 text-xs font-bold uppercase tracking-widest mb-1">
+                    Topping
+                  </p>
+                  <p className="text-xl font-bold text-white">
+                    {card.topping ? card.topping.name : '🌟 任意のトッピング (自由選択)'}
+                  </p>
+                  <p className="text-[10px] text-white/40 mt-1 italic">
+                    {card.suit === 'joker' ? 'Joker Luck!' : `Card: ${card.name.replace('_', ' ')}`}
+                  </p>
+                </div>
+                <button
+                  onClick={() => handleRemoveCard(idx)}
+                  className="absolute top-2 right-2 w-6 h-6 flex items-center justify-center rounded-full bg-black/40 text-white/40 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-500/80 hover:text-white"
+                  title="Remove"
+                >
+                  ×
+                </button>
+              </div>
+            ))}
           </div>
         </section>
       )}
