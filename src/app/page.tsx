@@ -88,7 +88,7 @@ export default function Home() {
         </section>
       )}
 
-      <footer className="mt-16 flex flex-col items-center gap-6 border-t border-white/10 pt-8">
+      <footer className="mt-16 flex flex-col items-center gap-8 border-t border-white/10 pt-8 pb-12">
         <div className="flex justify-center gap-8">
           <Link href="/manual" className="text-gold/80 hover:text-gold transition-colors text-sm uppercase tracking-widest font-bold">
             Manual Input
@@ -97,19 +97,28 @@ export default function Home() {
             Mapping Table
           </Link>
         </div>
-        <div className="text-center">
-          <p className="text-xs text-white/40 uppercase tracking-widest mb-2">Inspired by</p>
-          <a
-            href="https://youtu.be/S3t48wgO_1A"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gold/60 hover:text-gold transition-colors text-xs flex items-center gap-2"
-          >
-            <span>僕らの別荘 - 闇ココイチいし</span>
-            <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/>
-            </svg>
-          </a>
+        
+        <div className="w-full max-w-2xl px-4">
+          <p className="text-xs text-white/40 uppercase tracking-widest mb-4 text-center">Inspired by</p>
+          <div className="relative aspect-video rounded-xl overflow-hidden border-2 border-gold/20 shadow-2xl shadow-gold/5">
+            <iframe
+              src="https://www.youtube.com/embed/S3t48wgO_1A"
+              title="僕らの別荘 - 闇ココイチいし"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              className="absolute inset-0 w-full h-full"
+            ></iframe>
+          </div>
+          <p className="mt-3 text-center">
+            <a 
+              href="https://youtu.be/S3t48wgO_1A" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-gold/60 hover:text-gold transition-colors text-xs font-bold italic"
+            >
+              僕らの別荘 - 闇ココイチいし
+            </a>
+          </p>
         </div>
       </footer>
     </main>
