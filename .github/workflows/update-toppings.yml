@@ -1,0 +1,50 @@
+name: Update Toppings
+
+on:
+  schedule:
+    - cron: '0 0 * * 1' # 毎週月曜日 0:00 UTC (日本時間 9:00)
+  workflow_dispatch: # 手動実行用
+
+permissions:
+  contents: write
+  actions: write # ワークフローを実行するために必要
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Update toppings
+        run: npm run prebuild
+      
+      - name: Commit and push if changed
+        id: commit_push
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add data/toppings.json
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: auto-update toppings"
+            git push
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "No changes in toppings"
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Trigger deploy
+        if: steps.commit_push.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy.yml
